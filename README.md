@@ -1,8 +1,9 @@
 # Invoice Management API
-Overview
-The Invoice Management API is a robust solution for managing invoices, including creation, retrieval, updating, and deletion. It integrates authentication, validation, and logging mechanisms, ensuring a secure and scalable system.
+## Overview
+- The Invoice Management API is a robust solution for managing invoices, including creation, retrieval, updating, and deletion. 
+- It integrates authentication, validation, and logging mechanisms, ensuring a secure and scalable system.
 
-Features
+## Features
 CRUD Operations: Create, Read, Update, and Delete invoices.
 Authentication: Secured with JWT-based authentication.
 Audit Logging: Tracks changes to invoices.
@@ -43,7 +44,7 @@ Run the application:
 dotnet run
 Access Swagger UI: Navigate to https://localhost:<port>/swagger.
 
-API Endpoints
+## API Endpoints
 Authentication
 POST /api/auth/login
 Request: { "username": "admin", "password": "password" }
