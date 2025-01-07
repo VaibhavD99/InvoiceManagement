@@ -25,14 +25,10 @@ Postman or Swagger for API testing
 Setting Up Locally
 Clone the repository:
 
-bash
-Copy code
 git clone <repository-url>
 cd InvoiceManagementAPI
 Restore dependencies:
 
-bash
-Copy code
 dotnet restore
 Update appsettings.json:
 
@@ -40,14 +36,10 @@ Set your database connection string under ConnectionStrings:DefaultConnection.
 Configure JWT settings (Jwt:Key, Jwt:Issuer, Jwt:Audience, etc.).
 Apply database migrations:
 
-bash
-Copy code
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 Run the application:
 
-bash
-Copy code
 dotnet run
 Access Swagger UI: Navigate to https://localhost:<port>/swagger.
 
