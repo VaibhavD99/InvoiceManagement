@@ -16,14 +16,14 @@ namespace InvoiceManagement.Repositories
         public async Task<List<Invoice>> GetAllAsync()
         {
             return await _context.Invoices
-                .Include(i => i.InvoiceItems) // Include related items
+                .Include(i => i.InvoiceItems)
                 .ToListAsync();
         }
 
         public async Task<Invoice> GetByIdAsync(Guid id)
         {
             return await _context.Invoices
-                .Include(i => i.InvoiceItems) // Include related items
+                .Include(i => i.InvoiceItems)
                 .FirstOrDefaultAsync(i => i.Id == id);
         }
 

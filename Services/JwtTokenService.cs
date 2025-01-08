@@ -18,35 +18,32 @@ namespace InvoiceManagement.Services
 
         public string GenerateToken(string userId, string userRole)
         {
-            try
+            var jwtSettings = _configuration.GetSection("Jwt");
+
+            var key = jwtSettings["Key"] ?? throw new ArgumentNullException("JWT Key cannot be null");
+            var issuer = jwtSettings["Issuer"] ?? throw new ArgumentNullException("JWT Issuer cannot be null");
+            var audience = jwtSettings["Audience"] ?? throw new ArgumentNullException("JWT Audience cannot be null");
+            var duration = jwtSettings["DurationInMinutes"] ?? throw new ArgumentNullException("JWT Duration cannot be null");
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
             {
-                var jwtSettings = _configuration.GetSection("JwtSettings");
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]));
-                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                new Claim(JwtRegisteredClaimNames.Sub, userId),
+                new Claim(ClaimTypes.Role, userRole),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
 
-                var claims = new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, userId),
-                    new Claim(ClaimTypes.Role, userRole),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                };
+            var token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(double.Parse(duration)),
+                signingCredentials: credentials
+            );
 
-                var token = new JwtSecurityToken(
-                    issuer: jwtSettings["Issuer"],
-                    audience: jwtSettings["Audience"],
-                    claims: claims,
-                    expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["DurationInMinutes"])),
-                    signingCredentials: credentials
-                );
-
-                _logger.LogInformation("JWT token generated successfully for user {UserId}.", userId);
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error generating JWT token for user {UserId}", userId);
-                throw;
-            }
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
