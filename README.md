@@ -32,7 +32,7 @@ cd InvoiceManagementAPI
 2.	Restore dependencies:
 dotnet restore
 3.	Update appsettings.json:
-o	Set your database connection string under ConnectionStrings:DefaultConnection.
+- Set your database connection string under ConnectionStrings:DefaultConnection.
 o	Configure JWT settings (Jwt:Key, Jwt:Issuer, Jwt:Audience, etc.).
 4.	Apply database migrations:
 dotnet ef migrations add InitialCreate
@@ -43,28 +43,29 @@ dotnet run
 ________________________________________
 ## API Endpoints
 ### Authentication
-•	POST /api/auth/login
-o	Request: { "username": "admin", "password": "password" }
-o	Response: { "token": "jwt-token" }
+- POST /api/auth/login
+- Request: { "username": "admin", "password": "password" }
+- Response: { "token": "jwt-token" }
+
 ### Invoices
-•	GET /api/invoices - Retrieve all invoices.
-•	GET /api/invoices/{id} - Retrieve a specific invoice by ID.
-•	POST /api/invoices - Create a new invoice.
-•	PUT /api/invoices/{id} - Update an existing invoice.
-•	DELETE /api/invoices/{id} - Delete an invoice.
+- GET /api/invoices - Retrieve all invoices.
+- GET /api/invoices/{id} - Retrieve a specific invoice by ID.
+- POST /api/invoices - Create a new invoice.
+- 	PUT /api/invoices/{id} - Update an existing invoice.
+- 	DELETE /api/invoices/{id} - Delete an invoice.
 ________________________________________
 ## Validation
-•	Customer Name: Must not contain special characters.
-•	Total Amount: Must be a positive number.
+- Customer Name: Must not contain special characters.
+- 	Total Amount: Must be a positive number.
 Validation is handled via the ValidationHelper class.
 ________________________________________
 ## Rate Limiting
-•	Globally applied to all endpoints via RateLimitingExtensions.
-•	Configurable in appsettings.json under the IpRateLimiting section.
+- Globally applied to all endpoints via RateLimitingExtensions.
+- Configurable in appsettings.json under the IpRateLimiting section.
 ________________________________________
 ## Logging
-•	Logs stored in logs/app_log.txt.
-•	Includes details for every API action and error.
+- Logs stored in logs/app_log.txt.
+- Includes details for every API action and error.
 ________________________________________
 ## Contributing
 1.	Fork the repository.
