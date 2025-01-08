@@ -32,11 +32,11 @@ cd InvoiceManagementAPI
 2.	Restore dependencies:
 dotnet restore
 3.	Update appsettings.json:
-4.Set your database connection string under ConnectionStrings:DefaultConnection.
-5.Configure JWT settings (Jwt:Key, Jwt:Issuer, Jwt:Audience, etc.).
+4. Set your database connection string under ConnectionStrings:DefaultConnection.
+5. Configure JWT settings (Jwt:Key, Jwt:Issuer, Jwt:Audience, etc.).
 6.	Apply database migrations:
-dotnet ef migrations add InitialCreate
-dotnet ef database update
+- dotnet ef migrations add InitialCreate
+- dotnet ef database update
 7.Run the application:
 dotnet run
 8.Access Swagger UI: Navigate to https://localhost:<port>/swagger.
